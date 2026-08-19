@@ -1,4 +1,4 @@
-# Cori 🪶
+# Cori 🐦‍⬛
 
 **AI incident-response agent for CORTX — powered by Sibyl Memory**
 
