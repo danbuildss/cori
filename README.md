@@ -1,14 +1,21 @@
 # Cori 🐦‍⬛
 
-**AI incident-response agent for CORTX — powered by Sibyl Memory**
-
-Cori watches your CORTX alerts, builds memory across incidents, and sends smarter Telegram briefings over time. The more alerts it sees, the sharper its analysis gets — because it actually remembers.
+> **This repository is archived.** Cori now lives inside CORTX:
+> **[danbuildss/cortx → `agent/cori`](https://github.com/danbuildss/cortx/tree/main/agent/cori)**.
+>
+> Cori is CORTX's autonomous reliability agent. Today it discovers paid x402
+> services (starting with the Coinbase CDP Bazaar), checks them for free, and
+> queues good candidates for human review. It never pays for anything and never
+> holds a wallet key. Design: [`docs/CORI_SCOUT_V0_SPEC.md`](https://github.com/danbuildss/cortx/blob/main/docs/CORI_SCOUT_V0_SPEC.md).
+>
+> What follows is the original hackathon scaffold (Aug 2026), kept for
+> reference. It was never deployed.
 
 ---
 
 ## What it does
 
-1. **Receives** alert webhooks from CORTX (price spikes, volume anomalies, whale moves)
+1. **Receives** alert webhooks from CORTX (the scaffold's examples below use token alerts; CORTX's real alerts are paid-API reliability incidents)
 2. **Checks memory** — has this token spiked before? What happened last time?
 3. **Analyzes** the current alert in context of past incidents
 4. **Delivers** a Telegram message with memory-backed context, not just raw data
@@ -56,7 +63,7 @@ uvicorn agent.main:app --reload --port 8000
 | `TELEGRAM_BOT_TOKEN` | From @BotFather — same bot as CORTX |
 | `TELEGRAM_CHAT_ID` | Target chat / channel ID |
 | `CORTX_WEBHOOK_SECRET` | Shared secret from CORTX alert config |
-| `X402_PRIVATE_KEY` | Base wallet private key for x402 payments |
+| `X402_PAY_TO_ADDRESS` | Base address that receives `/analyze` payments. A payment gate only needs a receiving address; never put a private key on an agent server. |
 | `SIBYL_DB_PATH` | Path to Sibyl Memory SQLite DB (default: `~/.sibyl/memory.db`) |
 
 ---
